@@ -3,5 +3,11 @@
     "airbnb", //
     "prettier",
     "prettier/react"
-  ]
+  ],
+  "env": {
+    "jest": true
+  },
+  "globals": {
+    "document": true
+  }
 }
