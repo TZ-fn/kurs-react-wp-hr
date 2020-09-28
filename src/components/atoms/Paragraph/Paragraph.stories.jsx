@@ -8,4 +8,4 @@ export default {
   decorators: [withKnobs],
 };
 
-export const Primary = () => <Paragraph>{text('Label', 'Lorem ipsum')}</Paragraph>;
+export const Normal = () => <Paragraph>{text('Label', 'Lorem ipsum')}</Paragraph>;
