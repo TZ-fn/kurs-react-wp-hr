@@ -1,6 +1,7 @@
 import React from 'react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import Button from './Button';
+import theme from 'theme/mainTheme';
 
 export default {
   title: 'Button',
@@ -11,11 +12,11 @@ export default {
 export const Primary = () => {
   const label = 'Colors';
   const options = {
-    Primary: 'hsl(49,100%,58%)',
-    Secondary: 'hsl(196,83%,75%)',
-    Tertiary: 'hsl(106,47%,64%)',
+    Primary: theme.primary,
+    Secondary: theme.secondary,
+    Tertiary: theme.tertiary,
   };
-  const defaultValue = 'hsl(49,100%,58%)';
+  const defaultValue = theme.primary;
 
   const value = select(label, options, defaultValue);
 

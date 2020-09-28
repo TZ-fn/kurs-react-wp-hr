@@ -11,7 +11,7 @@ const Input = styled.input`
   ::placeholder {
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: ${({ theme }) => theme.gray300};
+    color: ${({ theme }) => theme.grey300};
   }
 `;
 
