@@ -19,7 +19,7 @@ const StyledHeading = styled(Heading)`
 
 const InnerWrapper = styled.div`
   padding: 17px 30px;
-  background-color: ${({ yellow, theme }) => (yellow ? theme.note : 'white')};
+  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
 
   ${({ flex }) =>
     flex &&
@@ -37,9 +37,9 @@ const DateInfo = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const Card = () => (
+const Card = ({ activeColor }) => (
   <StyledWrapper>
-    <InnerWrapper yellow>
+    <InnerWrapper activeColor={activeColor}>
       <StyledHeading>My card</StyledHeading>
       <DateInfo>3 days ago</DateInfo>
     </InnerWrapper>

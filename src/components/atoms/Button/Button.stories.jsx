@@ -11,11 +11,11 @@ export default {
 export const Primary = () => {
   const label = 'Colors';
   const options = {
-    Note: 'hsl(49, 100%, 58%)',
-    Twitter: 'hsl(196, 83%, 75%)',
-    Article: 'hsl(106, 47%, 64%)',
+    Note: 'note',
+    Twitter: 'twitter',
+    Article: 'article',
   };
-  const defaultValue = 'hsl(49, 100%, 58%)';
+  const defaultValue = 'note';
 
   const value = select(label, options, defaultValue);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import Card from './Card';
 
 export default {
@@ -8,4 +8,16 @@ export default {
   decorators: [withKnobs],
 };
 
-export const Normal = () => <Card />;
+export const Normal = () => {
+  const label = 'Colors';
+  const options = {
+    Note: 'note',
+    Twitter: 'twitter',
+    Article: 'article',
+  };
+  const defaultValue = 'note';
+
+  const value = select(label, options, defaultValue);
+
+  return <Card activeColor={value} />;
+};
