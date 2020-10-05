@@ -8,16 +8,6 @@ export default {
   decorators: [withKnobs],
 };
 
-export const Normal = () => {
-  const label = 'Colors';
-  const options = {
-    Note: 'note',
-    Twitter: 'twitter',
-    Article: 'article',
-  };
-  const defaultValue = 'note';
-
-  const value = select(label, options, defaultValue);
-
-  return <Card activeColor={value} />;
-};
+export const Note = () => <Card />;
+export const Twitter = () => <Card cardType="twitter" />;
+export const Articles = () => <Card cardType="article" />;

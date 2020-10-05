@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
@@ -37,9 +38,9 @@ const DateInfo = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const Card = ({ activeColor }) => (
+const Card = ({ cardType }) => (
   <StyledWrapper>
-    <InnerWrapper activeColor={activeColor}>
+    <InnerWrapper activeColor={cardType}>
       <StyledHeading>My card</StyledHeading>
       <DateInfo>3 days ago</DateInfo>
     </InnerWrapper>
@@ -54,5 +55,13 @@ const Card = ({ activeColor }) => (
     </InnerWrapper>
   </StyledWrapper>
 );
+
+Card.propTypes = {
+  cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+};
+
+Card.defaultProps = {
+  cardType: 'note',
+};
 
 export default Card;
