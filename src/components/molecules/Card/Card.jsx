@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
+import LinkIcon from 'assets/icons/link.svg';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -18,9 +19,38 @@ const StyledHeading = styled(Heading)`
   margin: 5px 0 0;
 `;
 
+const StyledAvatar = styled.img`
+  width: 86px;
+  height: 86px;
+  border: 5px solid ${({ theme }) => theme.twitter};
+  border-radius: 50px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+`;
+
+const StyledLinkButton = styled.a`
+  display: block;
+  width: 47px;
+  height: 47px;
+  border-radius: 50px;
+  background: white url(${LinkIcon}) no-repeat;
+  background-size: 60%;
+  background-position: 50%;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
 const InnerWrapper = styled.div`
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+  position: relative;
+
+  :first-of-type {
+    z-index: 9999;
+  }
 
   ${({ flex }) =>
     flex &&
@@ -43,6 +73,8 @@ const Card = ({ cardType }) => (
     <InnerWrapper activeColor={cardType}>
       <StyledHeading>My card</StyledHeading>
       <DateInfo>3 days ago</DateInfo>
+      {cardType === 'article' && <StyledLinkButton href="https://www.google.com/" />}
+      {cardType === 'twitter' && <StyledAvatar src="https://unavatar.now.sh/kikobeats" />}
     </InnerWrapper>
 
     <InnerWrapper flex>

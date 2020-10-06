@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import React from 'react';
 import styled from 'styled-components';
-import theme from 'theme/mainTheme';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import BulbIcon from 'assets/icons/bulb.svg';
 import LogoutIcon from 'assets/icons/logout.svg';
