@@ -1,20 +1,15 @@
 import React from 'react';
+import MainTemplate from 'templates/MainTemplate';
 import Button from 'components/atoms/Button/Button';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from 'theme/GlobalStyle';
-import theme from 'theme/mainTheme';
 
 const Root = () => (
-  <>
-    <GlobalStyle />
-    <ThemeProvider theme={theme}>
-      <>
-        <h1>Hello world!</h1>
-        <Button>Close / Save</Button>
-        <Button secondary>Remove</Button>
-      </>
-    </ThemeProvider>
-  </>
+  <MainTemplate>
+    <>
+      <h1>Hello world!</h1>
+      <Button>Close / Save</Button>
+      <Button secondary>Remove</Button>
+    </>
+  </MainTemplate>
 );
 
 export default Root;
