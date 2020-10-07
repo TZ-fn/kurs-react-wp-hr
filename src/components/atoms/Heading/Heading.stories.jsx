@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Heading from './Heading';
 
 export default {
-  title: 'Heading',
+  title: 'Design System/Atoms/Heading',
   component: Heading,
   decorators: [withKnobs],
 };

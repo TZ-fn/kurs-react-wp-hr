@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import Paragraph from './Paragraph';
 
 export default {
-  title: 'Paragraph',
+  title: 'Design System/Atoms/Paragraph',
   component: Paragraph,
   decorators: [withKnobs],
 };

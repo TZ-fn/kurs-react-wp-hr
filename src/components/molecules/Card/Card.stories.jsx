@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Card from './Card';
 
 export default {
-  title: 'Card',
+  title: 'Design System/Molecules/Card',
   component: Card,
   decorators: [withKnobs],
 };

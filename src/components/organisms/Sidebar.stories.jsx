@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Sidebar from './Sidebar';
 
 export default {
-  title: 'Sidebar',
+  title: 'Design System/Organisms/Sidebar',
   component: Sidebar,
   decorators: [withKnobs],
 };

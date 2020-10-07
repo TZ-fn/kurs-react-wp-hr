@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Input from './Input';
 
 export default {
-  title: 'Input',
+  title: 'Design System/Atoms/Input',
   component: Input,
   decorators: [withKnobs],
 };
