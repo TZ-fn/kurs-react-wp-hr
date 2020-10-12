@@ -10,11 +10,16 @@ import TwitterIcon from 'assets/icons/twitter.svg';
 
 const StyledWrapper = styled.nav`
   position: fixed;
+  padding: 25px 0;
   top: 0;
   left: 0;
   width: 150px;
   height: 100vh;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledLogoLink = styled(NavLink)`
@@ -42,10 +47,11 @@ const StyledLinksList = styled.ul`
 const Sidebar = () => (
   <StyledWrapper>
     <StyledLogoLink to="/" />
-    <ButtonIcon as={NavLink} to="/" icon={PenIcon} />
-    <ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} />
-    <ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} />
-
+    <StyledLinksList>
+      <ButtonIcon as={NavLink} to="/" icon={PenIcon} />
+      <ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} />
+      <ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} />
+    </StyledLinksList>
     <StyledLogoutButton as={NavLink} to="/" icon={LogoutIcon} />
   </StyledWrapper>
 );
