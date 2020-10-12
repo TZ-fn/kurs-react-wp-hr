@@ -48,9 +48,9 @@ const Sidebar = () => (
   <StyledWrapper>
     <StyledLogoLink to="/" />
     <StyledLinksList>
-      <ButtonIcon as={NavLink} to="/" icon={PenIcon} />
-      <ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} />
-      <ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} />
+      <li><ButtonIcon as={NavLink} to="/" icon={PenIcon} /></li>
+      <li><ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} /></li>
+      <li><ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} /></li>
     </StyledLinksList>
     <StyledLogoutButton as={NavLink} to="/" icon={LogoutIcon} />
   </StyledWrapper>
