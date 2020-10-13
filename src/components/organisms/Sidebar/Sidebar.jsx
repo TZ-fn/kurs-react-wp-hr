@@ -16,8 +16,8 @@ const StyledWrapper = styled.nav`
   width: 150px;
   height: 100vh;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
@@ -44,15 +44,21 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = () => (
-  <StyledWrapper>
+const Sidebar = ({ pageType }) => (
+  <StyledWrapper activeColor={pageType}>
     <StyledLogoLink to="/" />
     <StyledLinksList>
-      <li><ButtonIcon as={NavLink} to="/" icon={PenIcon} /></li>
-      <li><ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} /></li>
-      <li><ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} /></li>
+      <li>
+        <ButtonIcon exact as={NavLink} to="/" icon={PenIcon} activeclass="active" />
+      </li>
+      <li>
+        <ButtonIcon as={NavLink} to="/twitters" icon={TwitterIcon} activeclass="active" />
+      </li>
+      <li>
+        <ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} activeclass="active" />
+      </li>
     </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/" icon={LogoutIcon} />
+    <StyledLogoutButton as={NavLink} to="/logout" icon={LogoutIcon} />
   </StyledWrapper>
 );
 
