@@ -68,21 +68,16 @@ const DateInfo = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, title, created, twitterName, articleUrl, content }) => (
   <StyledWrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>My card</StyledHeading>
-      <DateInfo>3 days ago</DateInfo>
-      {cardType === 'article' && <StyledLinkButton href="https://www.google.com/" />}
-      {cardType === 'twitter' && <StyledAvatar src="https://unavatar.now.sh/kikobeats" />}
+      <StyledHeading>{title}</StyledHeading>
+      <DateInfo>{created}</DateInfo>
+      {cardType === 'twitter' && <StyledAvatar src={`https://unavatar.now.sh/${twitterName}`} />}
+      {cardType === 'article' && <StyledLinkButton href={articleUrl} />}
     </InnerWrapper>
-
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis perspiciatis repudiandae,
-        dignissimos quisquam earum
-      </Paragraph>
-
+      <Paragraph>{content}</Paragraph>
       <Button secondary>Remove</Button>
     </InnerWrapper>
   </StyledWrapper>
@@ -90,10 +85,17 @@ const Card = ({ cardType }) => (
 
 Card.propTypes = {
   cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
 };
 
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleUrl: null,
 };
 
 export default Card;
