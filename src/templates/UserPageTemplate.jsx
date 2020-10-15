@@ -42,7 +42,7 @@ const UserPageTemplate = ({ children, pageType }) => (
         <StyledHeading big as="h1">
           {pageType}s
         </StyledHeading>
-        <StyledParagraph>6 {pageType}s</StyledParagraph>
+        <StyledParagraph>4 {pageType}s</StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
