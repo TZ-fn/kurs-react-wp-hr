@@ -73,8 +73,8 @@ const Card = ({ cardType, title, created, twitterName, articleUrl, content }) =>
     <InnerWrapper activeColor={cardType}>
       <StyledHeading>{title}</StyledHeading>
       <DateInfo>{created}</DateInfo>
-      {cardType === 'twitter' && <StyledAvatar src={`https://unavatar.now.sh/${twitterName}`} />}
-      {cardType === 'article' && <StyledLinkButton href={articleUrl} />}
+      {cardType === 'twitters' && <StyledAvatar src={`https://unavatar.now.sh/${twitterName}`} />}
+      {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
     </InnerWrapper>
     <InnerWrapper flex>
       <Paragraph>{content}</Paragraph>
