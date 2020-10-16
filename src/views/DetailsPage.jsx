@@ -3,7 +3,7 @@ import DetailsTemplate from 'templates/DetailsTemplate';
 
 const DetailsPage = () => (
   <>
-    <DetailsTemplate />;
+    <DetailsTemplate />
   </>
 );
 

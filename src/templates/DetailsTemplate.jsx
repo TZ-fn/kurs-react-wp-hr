@@ -8,14 +8,14 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
 
 const DetailsTemplate = () => (
-  <div>
+  <UserPageTemplate>
     <h1>Note</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime id dolorum odit reprehenderit
       repellendus nesciunt sapiente
     </p>
     <Link to="/">go back</Link>
-  </div>
+  </UserPageTemplate>
 );
 
 export default DetailsTemplate;
