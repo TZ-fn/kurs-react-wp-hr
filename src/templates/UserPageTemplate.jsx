@@ -10,7 +10,7 @@ const UserPageTemplate = ({ children, pageType }) => (
 );
 
 UserPageTemplate.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.element.isRequired,
   pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
