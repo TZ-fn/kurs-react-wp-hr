@@ -11,6 +11,9 @@
   "globals": {
     "document": true
   },
+  "rules": {
+    "react/state-in-constructor": false
+  },
   "settings": {
     "import/resolver": {
       "node": {
