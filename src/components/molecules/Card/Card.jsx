@@ -14,6 +14,11 @@ const StyledWrapper = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-rows: 0.25fr 1fr;
+  transition: 0.3s;
+
+  :hover {
+    box-shadow: 0 20px 60px -10px hsla(0, 0%, 0%, 0.2);
+  }
 `;
 
 const StyledHeading = styled(Heading)`
