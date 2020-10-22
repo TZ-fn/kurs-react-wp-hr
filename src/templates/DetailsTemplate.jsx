@@ -26,7 +26,7 @@ const StyledCardWrapper = styled.div`
 `;
 
 const StyledHeading = styled(Heading)`
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 `;
 
 const StyledCreatedParagraph = styled(Paragraph)`

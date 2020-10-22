@@ -12,7 +12,7 @@
     "document": true
   },
   "rules": {
-    "react/state-in-constructor": false
+    "react/state-in-constructor": 0
   },
   "settings": {
     "import/resolver": {
