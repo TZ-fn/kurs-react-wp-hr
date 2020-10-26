@@ -7,7 +7,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { connect } from 'react-redux';
-import { removeItem } from 'actions';
+import { removeItem as removeItemAction } from 'actions';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -77,7 +77,7 @@ const DateInfo = styled(Paragraph)`
 `;
 
 const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeItem(itemType, id)),
+  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
 });
 class Card extends Component {
   state = {
@@ -129,6 +129,7 @@ Card.propTypes = {
   content: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
+  removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {

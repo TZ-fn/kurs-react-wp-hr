@@ -8,4 +8,4 @@ export const removeItem = (itemType, id) => {
   };
 };
 
-export const joma = [];
+export const addItem = [];
