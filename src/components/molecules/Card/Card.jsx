@@ -6,6 +6,8 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import { connect } from 'react-redux';
+import { removeItem } from 'actions';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -73,6 +75,10 @@ const DateInfo = styled(Paragraph)`
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.bold};
 `;
+
+const mapDispatchToProps = (dispatch) => ({
+  removeItem: (itemType, id) => dispatch(removeItem(itemType, id)),
+});
 class Card extends Component {
   state = {
     redirect: false,
@@ -81,7 +87,16 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const { id, cardType, title, created, twitterName, articleUrl, content } = this.props;
+    const {
+      id,
+      cardType,
+      title,
+      created,
+      twitterName,
+      articleUrl,
+      content,
+      removeItem,
+    } = this.props;
     if (this.state.redirect) {
       return <Redirect to={`${cardType}/${id}`} />;
     }
@@ -97,7 +112,9 @@ class Card extends Component {
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button secondary>Remove</Button>
+          <Button onClick={() => removeItem(cardType, id)} secondary>
+            Remove
+          </Button>
         </InnerWrapper>
       </StyledWrapper>
     );
@@ -120,4 +137,4 @@ Card.defaultProps = {
   articleUrl: null,
 };
 
-export default Card;
+export default connect(null, mapDispatchToProps)(Card);
