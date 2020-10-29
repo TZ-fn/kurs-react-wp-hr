@@ -8,6 +8,7 @@ import BulbIcon from 'assets/icons/bulb.svg';
 import LogoutIcon from 'assets/icons/logout.svg';
 import PenIcon from 'assets/icons/pen.svg';
 import TwitterIcon from 'assets/icons/twitter.svg';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -45,8 +46,8 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageType }) => (
-  <StyledWrapper activeColor={pageType}>
+const Sidebar = ({ pageContext }) => (
+  <StyledWrapper activeColor={pageContext}>
     <StyledLogoLink to="/" />
     <StyledLinksList>
       <li>
@@ -64,7 +65,11 @@ const Sidebar = ({ pageType }) => (
 );
 
 Sidebar.propTypes = {
-  pageType: PropTypes.oneOf(['notes', 'articles', 'twitters']).isRequired,
+  pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']),
 };
 
-export default Sidebar;
+Sidebar.defaultProps = {
+  pageContext: 'notes',
+};
+
+export default withContext(Sidebar);
