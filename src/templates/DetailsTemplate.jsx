@@ -6,6 +6,7 @@ import UserPageTemplate from 'templates/UserPageTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -67,21 +68,21 @@ const StyledDeleteButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
-const DetailsTemplate = ({ pageType, title, created, content, articleUrl, twitterName }) => (
-  <UserPageTemplate pageType={pageType}>
+const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twitterName }) => (
+  <UserPageTemplate pageContext={pageContext}>
     <StyledWrapper>
       <StyledCardWrapper>
         <StyledHeading big>{title}</StyledHeading>
         <StyledCreatedParagraph>{created}</StyledCreatedParagraph>
         <StyledContentParagraph>{content}</StyledContentParagraph>
-        {pageType === 'articles' && <StyledLink href={articleUrl}>Open this article</StyledLink>}
-        {pageType === 'twitters' && (
+        {pageContext === 'articles' && <StyledLink href={articleUrl}>Open this article</StyledLink>}
+        {pageContext === 'twitters' && (
           <>
             <StyledLink href={`https://twitter.com/${twitterName}`}>Open this twitter</StyledLink>
             <StyledTwitterAvatar alt={title} src={`https://unavatar.now.sh/${twitterName}`} />
           </>
         )}
-        <Button as={Link} to={`/${pageType}`} pageType={pageType}>
+        <Button as={Link} to={`/${pageContext}`} pageContext={pageContext}>
           Save / Close
         </Button>
         <StyledDeleteButton>remove note</StyledDeleteButton>
@@ -91,7 +92,7 @@ const DetailsTemplate = ({ pageType, title, created, content, articleUrl, twitte
 );
 
 DetailsTemplate.propTypes = {
-  pageType: PropTypes.string.isRequired,
+  pageContext: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
@@ -104,4 +105,4 @@ DetailsTemplate.defaultProps = {
   twitterName: null,
 };
 
-export default DetailsTemplate;
+export default withContext(DetailsTemplate);

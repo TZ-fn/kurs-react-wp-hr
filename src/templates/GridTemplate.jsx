@@ -34,7 +34,7 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, pageType, pageContext }) => (
+const GridTemplate = ({ children, pageContext }) => (
   <UserPageTemplate>
     <StyledWrapper>
       <StyledPageHeader>
@@ -51,11 +51,11 @@ const GridTemplate = ({ children, pageType, pageContext }) => (
 
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
-  pageType: PropTypes.oneOf(['notes', 'articles', 'twitters']),
+  pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']),
 };
 
 GridTemplate.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
 export default withContext(GridTemplate);

@@ -7,7 +7,7 @@ import Card from 'components/molecules/Card/Card';
 const mapStateToProps = ({ notes }) => ({ notes });
 
 const Notes = ({ notes }) => (
-  <GridTemplate pageType="notes">
+  <GridTemplate pageContext="notes">
     {notes.map(({ id, title, content, created }) => (
       <Card id={id} cardType="notes" title={title} content={content} created={created} key={id} />
     ))}

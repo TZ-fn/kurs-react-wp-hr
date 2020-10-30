@@ -7,7 +7,7 @@ import Card from 'components/molecules/Card/Card';
 const mapStateToProps = ({ twitters }) => ({ twitters });
 
 const Twitters = ({ twitters }) => (
-  <GridTemplate pageType="twitters">
+  <GridTemplate pageContext="twitters">
     {twitters.map(({ id, title, content, created, twitterName }) => (
       <Card
         id={id}
