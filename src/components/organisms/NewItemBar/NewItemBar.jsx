@@ -5,6 +5,8 @@ import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import Heading from 'components/atoms/Heading/Heading';
 import withContext from 'hoc/withContext';
+import { connect } from 'react-redux';
+import { addItem as addItemAction } from 'actions';
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -27,13 +29,14 @@ const StyledTextArea = styled(Input)`
   margin: 30px 0 100px;
   border-radius: 20px;
   height: 30vh;
+  resize: none;
 `;
 
 const StyledInput = styled(Input)`
   margin-top: 25px;
 `;
 
-const NewItemBar = ({ pageContext, isVisible }) => (
+const NewItemBar = ({ pageContext, isVisible, addItem }) => (
   <StyledWrapper pageContext={pageContext} isVisible={isVisible}>
     <Heading big>Create a new {[...pageContext].slice(0, -1).join('')} </Heading>
     <StyledInput
@@ -41,7 +44,17 @@ const NewItemBar = ({ pageContext, isVisible }) => (
     />
     {pageContext === 'articles' && <StyledInput placeholder="link" />}
     <StyledTextArea as="textarea" placeholder="content" />
-    <Button pageContext={pageContext}>Add Note</Button>
+    <Button
+      onClick={() =>
+        addItem(pageContext, {
+          title: 'Hello World',
+          content: 'lorem ipsum dolor sit',
+        })
+      }
+      pageContext={pageContext}
+    >
+      Add {[...pageContext].slice(0, -1).join('')}
+    </Button>
   </StyledWrapper>
 );
 
@@ -55,4 +68,8 @@ NewItemBar.defaultProps = {
   isVisible: false,
 };
 
-export default withContext(NewItemBar);
+const mapDispatchToProps = (dispatch) => ({
+  addItem: (itemType, itemContent) => dispatch(addItemAction(itemType, itemContent)),
+});
+
+export default connect(null, mapDispatchToProps)(withContext(NewItemBar));

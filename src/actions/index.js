@@ -8,4 +8,16 @@ export const removeItem = (itemType, id) => {
   };
 };
 
-export const addItem = [];
+export const addItem = (itemType, itemContent) => {
+  const getId = () => `${Math.random().toString(36).substr(2, 9)}`;
+  return {
+    type: 'ADD_ITEM',
+    payload: {
+      itemType,
+      item: {
+        id: getId(),
+        ...itemContent,
+      },
+    },
+  };
+};
