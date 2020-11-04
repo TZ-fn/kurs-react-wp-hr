@@ -39,9 +39,8 @@ const StyledInput = styled(Input)`
 const NewItemBar = ({ pageContext, isVisible, addItem }) => (
   <StyledWrapper pageContext={pageContext} isVisible={isVisible}>
     <Heading big>Create a new {[...pageContext].slice(0, -1).join('')} </Heading>
-    <StyledInput
-      placeholder={pageContext === 'twitters' ? 'Account name eg. hello_roman' : 'title'}
-    />
+    <StyledInput placeholder="title" />
+    {pageContext === 'twitters' && <StyledInput placeholder="twitter name eg. hello_roman" />}
     {pageContext === 'articles' && <StyledInput placeholder="link" />}
     <StyledTextArea as="textarea" placeholder="content" />
     <Button
