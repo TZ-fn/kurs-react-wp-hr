@@ -78,7 +78,7 @@ class GridTemplate extends Component {
             icon={plusIcon}
             pageContext={pageContext}
           />
-          <NewItemBar isVisible={isNewItemBarVisible} />
+          <NewItemBar handleClose={this.toggleNewItemBar} isVisible={isNewItemBarVisible} />
         </StyledWrapper>
       </UserPageTemplate>
     );

@@ -7,6 +7,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import withContext from 'hoc/withContext';
 import { connect } from 'react-redux';
 import { addItem as addItemAction } from 'actions';
+import { Formik, Form, Field } from 'formik';
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -25,6 +26,11 @@ const StyledWrapper = styled.div`
   transition: transform 0.25s ease-in-out;
 `;
 
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledTextArea = styled(Input)`
   margin: 30px 0 100px;
   border-radius: 20px;
@@ -36,30 +42,50 @@ const StyledInput = styled(Input)`
   margin-top: 25px;
 `;
 
-const NewItemBar = ({ pageContext, isVisible, addItem }) => (
+const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => (
   <StyledWrapper pageContext={pageContext} isVisible={isVisible}>
     <Heading big>Create a new {[...pageContext].slice(0, -1).join('')} </Heading>
-    <StyledInput placeholder="title" />
-    {pageContext === 'twitters' && <StyledInput placeholder="twitter name eg. hello_roman" />}
-    {pageContext === 'articles' && <StyledInput placeholder="link" />}
-    <StyledTextArea as="textarea" placeholder="content" />
-    <Button
-      onClick={() =>
-        addItem(pageContext, {
-          title: 'Hello World',
-          content: 'lorem ipsum dolor sit',
-        })
-      }
-      pageContext={pageContext}
+    <Formik
+      initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}
+      onSubmit={(values) => {
+        addItem(pageContext, values);
+        handleClose();
+      }}
     >
-      Add {[...pageContext].slice(0, -1).join('')}
-    </Button>
+      {({ isSubmitting, handleChange, handleBlur, values }) => (
+        <StyledForm>
+          <StyledInput as={Field} type="text" name="title" placeholder="title" />
+          {pageContext === 'twitters' && (
+            <StyledInput
+              as={Field}
+              type="text"
+              name="twitterName"
+              placeholder="twitter name eg. hello_roman"
+            />
+          )}
+          {pageContext === 'articles' && (
+            <StyledInput as={Field} type="text" name="articleUrl" placeholder="link" />
+          )}
+          <StyledTextArea
+            name="content"
+            as="textarea"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.content}
+          />
+          <Button type="submit" pageContext={pageContext} disabled={isSubmitting}>
+            Add {[...pageContext].slice(0, -1).join('')}
+          </Button>
+        </StyledForm>
+      )}
+    </Formik>
   </StyledWrapper>
 );
 
 NewItemBar.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']),
   isVisible: PropTypes.bool,
+  addItem: PropTypes.func.isRequired,
 };
 
 NewItemBar.defaultProps = {
