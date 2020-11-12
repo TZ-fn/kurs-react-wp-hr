@@ -73,13 +73,20 @@ class LoginPage extends Component {
     isRegisterPage: true,
   };
 
+  handlePageSwitch = () => {
+    this.setState((prevState) => ({
+      isRegisterPage: !prevState.isRegisterPage,
+    }));
+  };
+
   render() {
+    const { isRegisterPage } = this.state;
     return (
       <StyledWrapper>
         <StyledLogo src={logoImg} alt="" />
         <Heading>Your new favorite online notes experience</Heading>
         <StyledAuthCard>
-          <Heading>Sign In</Heading>
+          <Heading>{isRegisterPage ? 'Create an account' : 'Sign in'}</Heading>
           <Formik
             initialValues={{ username: '', password: '' }}
             onSubmit={({ username, password }) => {
@@ -98,10 +105,12 @@ class LoginPage extends Component {
                   <StyledInput name="username" type="text" placeholder="login" />
                   <StyledInput name="password" type="password" placeholder="password" />
                   <Button pageContext="notes" type="submit">
-                    sign in
+                    {isRegisterPage ? 'Register' : 'Sign in'}
                   </Button>
                 </StyledForm>
-                <StyledLink>I want my account!</StyledLink>
+                <StyledLink onClick={this.handlePageSwitch}>
+                  {isRegisterPage ? 'I want to log in!' : 'I want my account!'}
+                </StyledLink>
               </>
             )}
           </Formik>
