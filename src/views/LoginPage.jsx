@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import logoImg from 'assets/icons/logo.svg';
@@ -35,41 +35,80 @@ const StyledAuthCard = styled.div`
 
 const StyledForm = styled(Form)`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 `;
 
-const LoginPage = () => (
-  <StyledWrapper>
-    <StyledLogo src={logoImg} alt="" />
-    <Heading>Your new favorite online notes experience</Heading>
-    <StyledAuthCard>
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={({ username, password }) => {
-          axios
-            .post('http://localhost:9000/api/user/login', {
-              username,
-              password,
-            })
-            .then(({ status }) => console.log(status))
-            .catch((err) => console.log(err));
-        }}
-      >
-        {() => (
-          <>
-            <Heading>Sign In</Heading>
-            <StyledForm>
-              <Field name="username" type="text" />
-              <Field name="password" type="password" />
-              <Button type="submit">sign in</Button>
-            </StyledForm>
-          </>
-        )}
-      </Formik>
-    </StyledAuthCard>
-  </StyledWrapper>
-);
+const StyledInput = styled(Field)`
+  margin: 0 0 30px 0;
+  height: 40px;
+  width: 300px;
+  padding: 15px 30px;
+  font-size: ${({ theme }) => theme.fontSize.s};
+  font-weight: ${({ theme }) => theme.regular};
+  background-color: ${({ theme }) => theme.grey100};
+  border: none;
+  border-radius: 50px;
+
+  ::placeholder {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: ${({ theme }) => theme.grey300};
+  }
+`;
+
+const StyledLink = styled(Button)`
+  height: 20px;
+  margin-top: 10px;
+  color: black;
+  background-color: transparent;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-weight: ${({ theme }) => theme.bold};
+  text-transform: uppercase;
+  text-decoration: underline;
+`;
+
+class LoginPage extends Component {
+  state = {
+    isRegisterPage: true,
+  };
+
+  render() {
+    return (
+      <StyledWrapper>
+        <StyledLogo src={logoImg} alt="" />
+        <Heading>Your new favorite online notes experience</Heading>
+        <StyledAuthCard>
+          <Heading>Sign In</Heading>
+          <Formik
+            initialValues={{ username: '', password: '' }}
+            onSubmit={({ username, password }) => {
+              axios
+                .post('http://localhost:9000/api/user/login', {
+                  username,
+                  password,
+                })
+                .then(({ status }) => console.log(status))
+                .catch((err) => console.log(err));
+            }}
+          >
+            {() => (
+              <>
+                <StyledForm>
+                  <StyledInput name="username" type="text" placeholder="login" />
+                  <StyledInput name="password" type="password" placeholder="password" />
+                  <Button pageContext="notes" type="submit">
+                    sign in
+                  </Button>
+                </StyledForm>
+                <StyledLink>I want my account!</StyledLink>
+              </>
+            )}
+          </Formik>
+        </StyledAuthCard>
+      </StyledWrapper>
+    );
+  }
+}
 
 export default LoginPage;
