@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import logoImg from 'assets/icons/logo.svg';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { authenticate as authenticateAction } from 'actions';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -80,6 +81,7 @@ class LoginPage extends Component {
   };
 
   render() {
+    const { authenticate } = this.props;
     const { isRegisterPage } = this.state;
     return (
       <StyledWrapper>
@@ -90,13 +92,7 @@ class LoginPage extends Component {
           <Formik
             initialValues={{ username: '', password: '' }}
             onSubmit={({ username, password }) => {
-              axios
-                .post('http://localhost:9000/api/user/login', {
-                  username,
-                  password,
-                })
-                .then(({ status }) => console.log(status))
-                .catch((err) => console.log(err));
+              authenticate(username, password);
             }}
           >
             {() => (
@@ -120,4 +116,8 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage);
