@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import logoImg from 'assets/icons/logo.svg';
@@ -94,6 +95,21 @@ class LoginPage extends Component {
           <Formik
             initialValues={{ username: '', password: '' }}
             onSubmit={({ username, password }) => {
+              if (isRegisterPage) {
+                return axios
+                  .post('http://localhost:9000/api/user/register', {
+                    username,
+                    password,
+                  })
+                  .then((payload) => {
+                    if (payload.data === 'Created') {
+                      this.handlePageSwitch();
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }
               authenticate(username, password);
             }}
           >
