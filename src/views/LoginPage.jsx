@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import logoImg from 'assets/icons/logo.svg';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
+import routes from 'routes/index';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authenticate as authenticateAction } from 'actions';
 
@@ -81,7 +83,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { authenticate } = this.props;
+    const { authenticate, userID } = this.props;
     const { isRegisterPage } = this.state;
     return (
       <StyledWrapper>
@@ -95,20 +97,25 @@ class LoginPage extends Component {
               authenticate(username, password);
             }}
           >
-            {() => (
-              <>
-                <StyledForm>
-                  <StyledInput name="username" type="text" placeholder="login" />
-                  <StyledInput name="password" type="password" placeholder="password" />
-                  <Button pageContext="notes" type="submit">
-                    {isRegisterPage ? 'Register' : 'Sign in'}
-                  </Button>
-                </StyledForm>
-                <StyledLink onClick={this.handlePageSwitch}>
-                  {isRegisterPage ? 'I want to log in!' : 'I want my account!'}
-                </StyledLink>
-              </>
-            )}
+            {() => {
+              if (!isRegisterPage && userID) {
+                return <Redirect to={routes.home} />;
+              }
+              return (
+                <>
+                  <StyledForm>
+                    <StyledInput name="username" type="text" placeholder="login" />
+                    <StyledInput name="password" type="password" placeholder="password" />
+                    <Button pageContext="notes" type="submit">
+                      {isRegisterPage ? 'Register' : 'Sign in'}
+                    </Button>
+                  </StyledForm>
+                  <StyledLink onClick={this.handlePageSwitch}>
+                    {isRegisterPage ? 'I want to log in!' : 'I want my account!'}
+                  </StyledLink>
+                </>
+              );
+            }}
           </Formik>
         </StyledAuthCard>
       </StyledWrapper>
@@ -116,8 +123,12 @@ class LoginPage extends Component {
   }
 }
 
+const mapStateToProps = ({ userID = null }) => ({
+  userID,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   authenticate: (username, password) => dispatch(authenticateAction(username, password)),
 });
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

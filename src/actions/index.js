@@ -49,10 +49,7 @@ export const authenticate = (username, password) => (dispatch) => {
       password,
     })
     .then((payload) => {
-      dispatch({
-        type: AUTH_FAILURE,
-        payload,
-      });
+      dispatch({ type: AUTH_SUCCESS, payload });
     })
     .catch((err) => {
       console.log(err);

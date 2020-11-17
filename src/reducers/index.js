@@ -108,7 +108,10 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_SUCCESS:
-      return {};
+      return {
+        ...state,
+        userID: action.payload.data._id,
+      };
 
     case REMOVE_ITEM:
       return {
