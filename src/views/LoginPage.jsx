@@ -110,7 +110,7 @@ class LoginPage extends Component {
                     console.log(err);
                   });
               }
-              authenticate(username, password);
+              return authenticate(username, password);
             }}
           >
             {() => {
