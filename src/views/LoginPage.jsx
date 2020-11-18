@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
@@ -35,6 +36,17 @@ const StyledAuthCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const StyledStatusBar = styled.div`
+  width: 95%;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+  background-color: #63da53;
+  padding: 15px 20px;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-weight: ${({ theme }) => theme.bold};
 `;
 
 const StyledForm = styled(Form)`
@@ -75,6 +87,7 @@ const StyledLink = styled(Button)`
 class LoginPage extends Component {
   state = {
     isRegisterPage: true,
+    wasRegisterSuccessful: false,
   };
 
   handlePageSwitch = () => {
@@ -85,16 +98,19 @@ class LoginPage extends Component {
 
   render() {
     const { authenticate, userID } = this.props;
-    const { isRegisterPage } = this.state;
+    const { isRegisterPage, wasRegisterSuccessful } = this.state;
     return (
       <StyledWrapper>
         <StyledLogo src={logoImg} alt="" />
         <Heading>Your new favorite online notes experience</Heading>
         <StyledAuthCard>
+          {wasRegisterSuccessful && (
+            <StyledStatusBar>Registration was successful, now please log in!</StyledStatusBar>
+          )}
           <Heading>{isRegisterPage ? 'Create an account' : 'Sign in'}</Heading>
           <Formik
             initialValues={{ username: '', password: '' }}
-            onSubmit={({ username, password }) => {
+            onSubmit={({ username, password }, { resetForm }) => {
               if (isRegisterPage) {
                 return axios
                   .post('http://localhost:9000/api/user/register', {
@@ -104,6 +120,10 @@ class LoginPage extends Component {
                   .then((payload) => {
                     if (payload.data === 'Created') {
                       this.handlePageSwitch();
+                      this.setState((prevState) => ({
+                        wasRegisterSuccessful: !prevState.wasRegisterSuccessful,
+                      }));
+                      resetForm({});
                     }
                   })
                   .catch((err) => {
@@ -138,6 +158,15 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  authenticate: PropTypes.func.isRequired,
+  userID: PropTypes.string,
+};
+
+LoginPage.defaultProps = {
+  userID: null,
+};
 
 const mapStateToProps = ({ userID = null }) => ({
   userID,
