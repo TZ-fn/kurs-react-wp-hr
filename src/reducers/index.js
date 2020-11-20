@@ -1,10 +1,13 @@
 import {
   ADD_ITEM,
   REMOVE_ITEM,
-  AUTH_SUCCESS /* AUTH_REQUEST, AUTH_FAILURE */,
+  AUTH_SUCCESS,
+  FETCH_SUCCESS /* AUTH_REQUEST, AUTH_FAILURE */,
 } from 'actions/index';
 
 const initialState = {
+  // adding the user ID manually to the store, to ease up development, and testing
+  userID: '5fb52c17152fc70d78552555',
   notes: [
     {
       id: '1',
@@ -35,40 +38,40 @@ const initialState = {
       created: '10 days',
     },
   ],
-  twitters: [
-    {
-      id: '1',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'hello_roman',
-    },
-    {
-      id: '2',
-      title: 'Redux guy',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'dan_abramov',
-    },
-    {
-      id: '3',
-      title: 'React router stuff',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '5 days',
-      twitterName: 'mjackson',
-    },
-    {
-      id: '4',
-      title: 'Super animacje!',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '10 days',
-      twitterName: 'sarah_edo',
-    },
-  ],
+  // twitters: [
+  //   {
+  //     id: '1',
+  //     title: 'Hello Roman',
+  //     content:
+  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+  //     created: '1 day',
+  //     twitterName: 'hello_roman',
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'Redux guy',
+  //     content:
+  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+  //     created: '1 day',
+  //     twitterName: 'dan_abramov',
+  //   },
+  //   {
+  //     id: '3',
+  //     title: 'React router stuff',
+  //     content:
+  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+  //     created: '5 days',
+  //     twitterName: 'mjackson',
+  //   },
+  //   {
+  //     id: '4',
+  //     title: 'Super animacje!',
+  //     content:
+  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+  //     created: '10 days',
+  //     twitterName: 'sarah_edo',
+  //   },
+  // ],
   articles: [
     {
       id: '1',
@@ -111,6 +114,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userID: action.payload.data._id,
+      };
+
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        [action.payload.itemType]: [...action.payload.data],
       };
 
     case REMOVE_ITEM:
