@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DetailsTemplate from 'templates/DetailsTemplate';
 import routes from 'routes/index';
+import withContext from 'hoc/withContext';
+import { connect } from 'react-redux';
 
 class DetailsPage extends Component {
   state = {
@@ -54,4 +56,6 @@ DetailsPage.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-export default DetailsPage;
+const mapStateToProps = (state, ownProps) => {};
+
+export default withContext(DetailsPage);
