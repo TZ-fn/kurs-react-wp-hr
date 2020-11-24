@@ -31,12 +31,6 @@ const StyledHeading = styled(Heading)`
   margin-bottom: 0px;
 `;
 
-const StyledCreatedParagraph = styled(Paragraph)`
-  margin: 0;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.bold};
-  text-transform: uppercase;
-`;
 const StyledContentParagraph = styled(Paragraph)`
   margin: 40px 0 40px;
 `;
@@ -68,12 +62,11 @@ const StyledDeleteButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
-const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twitterName }) => (
+const DetailsTemplate = ({ pageContext, title, content, articleUrl, twitterName }) => (
   <UserPageTemplate pageContext={pageContext}>
     <StyledWrapper>
       <StyledCardWrapper>
         <StyledHeading big>{title}</StyledHeading>
-        <StyledCreatedParagraph>{created}</StyledCreatedParagraph>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         {pageContext === 'articles' && <StyledLink href={articleUrl}>Open this article</StyledLink>}
         {pageContext === 'twitters' && (
@@ -82,7 +75,7 @@ const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twi
             <StyledTwitterAvatar alt={title} src={`https://unavatar.now.sh/${twitterName}`} />
           </>
         )}
-        <Button as={Link} to={`/${pageContext}`} pageContext={pageContext}>
+        <Button as={Link} to={`/${pageContext}`} $pageContext={pageContext}>
           Save / Close
         </Button>
         <StyledDeleteButton>remove note</StyledDeleteButton>
@@ -94,7 +87,6 @@ const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twi
 DetailsTemplate.propTypes = {
   pageContext: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   articleUrl: PropTypes.string,
   twitterName: PropTypes.string,
