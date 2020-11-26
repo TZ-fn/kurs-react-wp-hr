@@ -17,7 +17,7 @@ class DetailsPage extends Component {
 
   componentDidMount() {
     if (this.props.activeItem) {
-      const [activeItem] = this.props.activeItem;
+      const { activeItem } = this.props;
       this.setState({ activeItem });
     } else {
       const { id } = this.props.match.params;
@@ -32,7 +32,6 @@ class DetailsPage extends Component {
 
   render() {
     const { activeItem } = this.state;
-    console.log(activeItem);
     return (
       <DetailsTemplate
         title={activeItem.title}
@@ -46,15 +45,17 @@ class DetailsPage extends Component {
 
 DetailsPage.propTypes = {
   match: PropTypes.object.isRequired,
-  activeItem: PropTypes.arrayOf(PropTypes.object),
+  activeItem: PropTypes.object,
+};
+
+DetailsTemplate.defaultProps = {
+  activeItem: {},
 };
 
 const mapStateToProps = (state, ownProps) => {
   if (state[ownProps.pageContext]) {
     return {
-      activeItem: state[ownProps.pageContext].filter(
-        (item) => item._id === ownProps.match.params.id,
-      ),
+      activeItem: state[ownProps.pageContext].find((item) => item._id === ownProps.match.params.id),
     };
   }
   return {};
