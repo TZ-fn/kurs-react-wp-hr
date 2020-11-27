@@ -47,9 +47,10 @@ const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => (
     <Heading big>Create a new {[...pageContext].slice(0, -1).join('')} </Heading>
     <Formik
       initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         addItem(pageContext, values);
         handleClose();
+        resetForm({});
       }}
     >
       {({ isSubmitting, handleChange, handleBlur, values }) => (
