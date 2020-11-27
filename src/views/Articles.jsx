@@ -1,41 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
+import { fetchItems } from 'actions';
 
-const mapStateToProps = ({ articles }) => ({ articles });
+class Articles extends Component {
+  componentDidMount() {
+    const { fetchArticles } = this.props;
+    fetchArticles();
+  }
 
-const Articles = ({ articles }) => (
-  <GridTemplate pageContext="articles">
-    {articles.map(({ id, title, content, articleUrl, created }) => (
-      <Card
-        id={id}
-        cardType="articles"
-        title={title}
-        content={content}
-        articleUrl={articleUrl}
-        created={created}
-        key={id}
-      />
-    ))}
-  </GridTemplate>
-);
+  render() {
+    const { articles } = this.props;
+    return (
+      <GridTemplate pageContext="articles">
+        {articles.map(({ _id: id, title, content, articleUrl }) => (
+          <Card
+            id={id}
+            cardType="articles"
+            title={title}
+            content={content}
+            articleUrl={articleUrl}
+            key={id}
+          />
+        ))}
+      </GridTemplate>
+    );
+  }
+}
 
 Articles.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
       articleUrl: PropTypes.string.isRequired,
     }),
   ),
+  fetchArticles: PropTypes.func.isRequired,
 };
 
 Articles.defaultProps = {
   articles: [],
 };
 
-export default connect(mapStateToProps)(Articles);
+const mapStateToProps = ({ articles }) => ({ articles });
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchArticles: () => dispatch(fetchItems('articles')),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);

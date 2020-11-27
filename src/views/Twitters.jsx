@@ -7,7 +7,8 @@ import { fetchItems } from 'actions';
 
 class Twitters extends Component {
   componentDidMount() {
-    this.props.fetchTwitters();
+    const { fetchTwitters } = this.props;
+    fetchTwitters();
   }
 
   render() {
@@ -38,6 +39,7 @@ Twitters.propTypes = {
       twitterName: PropTypes.string.isRequired,
     }),
   ),
+  fetchTwitters: PropTypes.func.isRequired,
 };
 
 Twitters.defaultProps = {

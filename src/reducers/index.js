@@ -1,111 +1,8 @@
-import {
-  ADD_ITEM,
-  REMOVE_ITEM,
-  AUTH_SUCCESS,
-  FETCH_SUCCESS /* AUTH_REQUEST, AUTH_FAILURE */,
-} from 'actions/index';
+import { ADD_ITEM_SUCCESS, AUTH_SUCCESS, FETCH_SUCCESS, REMOVE_ITEM_SUCCESS } from 'actions/index';
 
 const initialState = {
   // adding the user ID manually to the store, to ease up development, and testing
   userID: '5fb52c17152fc70d78552555',
-  notes: [
-    {
-      id: '1',
-      title: 'Wake me up when Vue ends',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-    {
-      id: '2',
-      title: 'Como es An Gular?',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-    {
-      id: '3',
-      title: 'Du bist Reactish',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '5 days',
-    },
-    {
-      id: '4',
-      title: 'Reactuj się kto moze!',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '10 days',
-    },
-  ],
-  // twitters: [
-  //   {
-  //     id: '1',
-  //     title: 'Hello Roman',
-  //     content:
-  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-  //     created: '1 day',
-  //     twitterName: 'hello_roman',
-  //   },
-  //   {
-  //     id: '2',
-  //     title: 'Redux guy',
-  //     content:
-  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-  //     created: '1 day',
-  //     twitterName: 'dan_abramov',
-  //   },
-  //   {
-  //     id: '3',
-  //     title: 'React router stuff',
-  //     content:
-  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-  //     created: '5 days',
-  //     twitterName: 'mjackson',
-  //   },
-  //   {
-  //     id: '4',
-  //     title: 'Super animacje!',
-  //     content:
-  //       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-  //     created: '10 days',
-  //     twitterName: 'sarah_edo',
-  //   },
-  // ],
-  articles: [
-    {
-      id: '1',
-      title: 'React on my mind',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      articleUrl: 'https://youtube.com/helloroman',
-      created: '1 day',
-    },
-    {
-      id: '2',
-      title: 'Wish you React',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      articleUrl: 'https://youtube.com/helloroman',
-      created: '1 day',
-    },
-    {
-      id: '3',
-      title: 'You gave React a bad name',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      articleUrl: 'https://youtube.com/helloroman',
-      created: '5 days',
-    },
-    {
-      id: '4',
-      title: 'Is it React you looking for?',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      articleUrl: 'https://youtube.com/helloroman',
-      created: '10 days',
-    },
-  ],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -122,18 +19,18 @@ const rootReducer = (state = initialState, action) => {
         [action.payload.itemType]: [...action.payload.data],
       };
 
-    case REMOVE_ITEM:
+    case REMOVE_ITEM_SUCCESS:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType]].filter(
-          (item) => item.id !== action.payload.id,
+          (item) => item._id !== action.payload.id,
         ),
       };
 
-    case ADD_ITEM:
+    case ADD_ITEM_SUCCESS:
       return {
         ...state,
-        [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
+        [action.payload.itemType]: [...state[action.payload.itemType], action.payload.data],
       };
 
     default:
