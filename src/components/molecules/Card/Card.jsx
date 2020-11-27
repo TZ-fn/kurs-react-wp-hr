@@ -82,12 +82,13 @@ class Card extends Component {
 
   render() {
     const { id, pageContext, title, twitterName, articleUrl, content, removeItem } = this.props;
-    if (this.state.redirect) {
+    const { redirect } = this.state;
+    if (redirect === true) {
       return <Redirect to={`${pageContext}/${id}`} />;
     }
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={pageContext}>
+      <StyledWrapper>
+        <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
           <StyledHeading>{title}</StyledHeading>
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://unavatar.now.sh/${twitterName}`} />
