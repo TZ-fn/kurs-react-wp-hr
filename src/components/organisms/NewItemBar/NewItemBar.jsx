@@ -74,7 +74,7 @@ const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => (
             onBlur={handleBlur}
             value={values.content}
           />
-          <Button type="submit" pageContext={pageContext} disabled={isSubmitting}>
+          <Button type="submit" $pageContext={pageContext} disabled={isSubmitting}>
             Add {[...pageContext].slice(0, -1).join('')}
           </Button>
         </StyledForm>
