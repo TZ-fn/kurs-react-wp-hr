@@ -70,7 +70,9 @@ class GridTemplate extends Component {
             <StyledHeading big as="h1">
               {pageContext}
             </StyledHeading>
-            <StyledParagraph>4 {pageContext}</StyledParagraph>
+            <StyledParagraph>
+              {children.length} {children.length === 1 ? pageContext.slice(0, -1) : pageContext}
+            </StyledParagraph>
           </StyledPageHeader>
           <StyledGrid>{children}</StyledGrid>
           <StyledButtonIcon
