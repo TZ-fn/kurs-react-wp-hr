@@ -21,7 +21,6 @@ export const removeItem = (itemType, id) => (dispatch) => {
   axios
     .delete(`http://localhost:9000/api/note/${id}`)
     .then(() => {
-      console.log('Deleted!');
       dispatch({
         type: REMOVE_ITEM_SUCCESS,
         payload: {
