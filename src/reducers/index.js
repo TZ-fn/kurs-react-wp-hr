@@ -2,7 +2,7 @@ import { ADD_ITEM_SUCCESS, AUTH_SUCCESS, FETCH_SUCCESS, REMOVE_ITEM_SUCCESS } fr
 
 const initialState = {
   // adding the user ID manually to the store, to ease up development, and testing
-  userID: '5fb52c17152fc70d78552555',
+  // userID: '5fb52c17152fc70d78552555',
 };
 
 const rootReducer = (state = initialState, action) => {

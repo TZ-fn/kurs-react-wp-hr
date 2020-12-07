@@ -60,7 +60,7 @@ const Sidebar = ({ pageContext }) => (
         <ButtonIcon as={NavLink} to="/articles" icon={BulbIcon} activeclass="active" />
       </li>
     </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/logout" icon={LogoutIcon} />
+    <StyledLogoutButton as={NavLink} to="/login" icon={LogoutIcon} />
   </StyledWrapper>
 );
 

@@ -142,7 +142,7 @@ class LoginPage extends Component {
                   <StyledForm>
                     <StyledInput name="username" type="text" placeholder="login" />
                     <StyledInput name="password" type="password" placeholder="password" />
-                    <Button pageContext="notes" type="submit">
+                    <Button $pageContext="notes" type="submit">
                       {isRegisterPage ? 'Register' : 'Sign in'}
                     </Button>
                   </StyledForm>
