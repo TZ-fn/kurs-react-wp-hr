@@ -1,4 +1,10 @@
-import { ADD_ITEM_SUCCESS, AUTH_SUCCESS, FETCH_SUCCESS, REMOVE_ITEM_SUCCESS } from 'actions/index';
+import {
+  ADD_ITEM_SUCCESS,
+  AUTH_SUCCESS,
+  LOGOUT_SUCCESS,
+  FETCH_SUCCESS,
+  REMOVE_ITEM_SUCCESS,
+} from 'actions/index';
 
 const initialState = {
   // adding the user ID manually to the store, to ease up development, and testing
@@ -11,6 +17,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userID: action.payload.data._id,
+      };
+
+    case LOGOUT_SUCCESS:
+      return {
+        ...initialState,
       };
 
     case FETCH_SUCCESS:

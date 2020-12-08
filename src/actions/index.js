@@ -12,6 +12,10 @@ export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
 export const FETCH_REQUEST = 'FETCH_REQUEST';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
@@ -95,5 +99,20 @@ export const authenticate = (username, password) => (dispatch) => {
     .catch((err) => {
       console.log(err);
       dispatch({ type: AUTH_FAILURE });
+    });
+};
+
+export const logout = (userID) => (dispatch) => {
+  dispatch({ type: LOGOUT_REQUEST });
+  return axios
+    .post('http://localhost:9000/api/user/logout', {
+      id: userID,
+    })
+    .then((payload) => {
+      dispatch({ type: LOGOUT_SUCCESS, payload });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: LOGOUT_FAILURE });
     });
 };
