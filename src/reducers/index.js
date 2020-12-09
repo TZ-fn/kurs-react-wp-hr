@@ -1,5 +1,6 @@
 import {
   ADD_ITEM_SUCCESS,
+  REGISTER_SUCCESS,
   AUTH_SUCCESS,
   LOGOUT_SUCCESS,
   FETCH_SUCCESS,
@@ -13,6 +14,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isUserRegistered: true,
+      };
+
     case AUTH_SUCCESS:
       return {
         ...state,

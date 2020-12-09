@@ -9,7 +9,7 @@ import Button from 'components/atoms/Button/Button';
 import routes from 'routes/index';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { authenticate as authenticateAction } from 'actions';
+import { register as registerAction, authenticate as authenticateAction } from 'actions';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -168,12 +168,14 @@ LoginPage.defaultProps = {
   userID: null,
 };
 
-const mapStateToProps = ({ userID = null }) => ({
+const mapStateToProps = ({ userID = null, isUserRegistered = false }) => ({
   userID,
+  isUserRegistered,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+  register: (username, password) => dispatch(registerAction(username, password)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

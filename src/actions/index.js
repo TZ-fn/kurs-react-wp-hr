@@ -8,6 +8,10 @@ export const REMOVE_ITEM_REQUEST = 'REMOVE_ITEM_REQUEST';
 export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS';
 export const REMOVE_ITEM_FAILURE = 'REMOVE_ITEM_FAILURE';
 
+export const REGISTER_REQUEST = 'AUTH_REQUEST';
+export const REGISTER_SUCCESS = 'AUTH_SUCCESS';
+export const REGISTER_FAILURE = 'AUTH_FAILURE';
+
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
@@ -83,6 +87,22 @@ export const fetchItems = (itemType) => (dispatch, getState) => {
     .catch((err) => {
       console.log(err);
       dispatch({ type: FETCH_FAILURE });
+    });
+};
+
+export const register = (username, password) => (dispatch) => {
+  dispatch({ type: REGISTER_REQUEST });
+  return axios
+    .post('http://localhost:9000/api/user/register', {
+      username,
+      password,
+    })
+    .then((payload) => {
+      dispatch({ type: REGISTER_SUCCESS, payload });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: REGISTER_FAILURE });
     });
 };
 
