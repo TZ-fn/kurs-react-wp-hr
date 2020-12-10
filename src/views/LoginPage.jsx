@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import logoImg from 'assets/icons/logo.svg';
@@ -87,7 +86,6 @@ const StyledLink = styled(Button)`
 class LoginPage extends Component {
   state = {
     isRegisterPage: true,
-    wasRegisterSuccessful: false,
   };
 
   handlePageSwitch = () => {
@@ -97,14 +95,14 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { authenticate, userID } = this.props;
-    const { isRegisterPage, wasRegisterSuccessful } = this.state;
+    const { authenticate, register, userID, isUserRegistered } = this.props;
+    const { isRegisterPage } = this.state;
     return (
       <StyledWrapper>
         <StyledLogo src={logoImg} alt="" />
         <Heading>Your new favorite online notes experience</Heading>
         <StyledAuthCard>
-          {wasRegisterSuccessful && (
+          {isUserRegistered && (
             <StyledStatusBar>Registration was successful, now please log in!</StyledStatusBar>
           )}
           <Heading>{isRegisterPage ? 'Create an account' : 'Sign in'}</Heading>
@@ -112,23 +110,9 @@ class LoginPage extends Component {
             initialValues={{ username: '', password: '' }}
             onSubmit={({ username, password }, { resetForm }) => {
               if (isRegisterPage) {
-                return axios
-                  .post('http://localhost:9000/api/user/register', {
-                    username,
-                    password,
-                  })
-                  .then((payload) => {
-                    if (payload.data === 'Created') {
-                      this.handlePageSwitch();
-                      this.setState((prevState) => ({
-                        wasRegisterSuccessful: !prevState.wasRegisterSuccessful,
-                      }));
-                      resetForm({});
-                    }
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
+                register(username, password);
+                this.handlePageSwitch();
+                resetForm({});
               }
               return authenticate(username, password);
             }}
@@ -161,6 +145,8 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
   authenticate: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isUserRegistered: PropTypes.bool.isRequired,
   userID: PropTypes.string,
 };
 
