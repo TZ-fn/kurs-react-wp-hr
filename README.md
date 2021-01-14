@@ -10,7 +10,7 @@ Most of the code is based on the code used in the course, however login and logo
 
 ## Live version
 
-Live version can be found [here](to_do).
+Live version (back-end hosted on Heroku, front-end on Netlify) can be found [here](to_do).
 
 ## Technologies used
 

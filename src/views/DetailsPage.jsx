@@ -22,7 +22,7 @@ class DetailsPage extends Component {
     } else {
       const { id } = this.props.match.params;
       axios
-        .get(`http://localhost:9000/api/note/${id}`)
+        .get(`https://kurs-react-wp-hr-backend.herokuapp.com/api/note/${id}`)
         .then(({ data }) => {
           this.setState({ activeItem: data });
         })

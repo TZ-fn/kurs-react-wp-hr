@@ -27,7 +27,7 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 export const removeItem = (itemType, id) => (dispatch) => {
   dispatch({ type: REMOVE_ITEM_REQUEST });
   axios
-    .delete(`http://localhost:9000/api/note/${id}`)
+    .delete(`https://kurs-react-wp-hr-backend.herokuapp.com/api/note/${id}`)
     .then(() => {
       dispatch({
         type: REMOVE_ITEM_SUCCESS,
@@ -46,7 +46,7 @@ export const removeItem = (itemType, id) => (dispatch) => {
 export const addItem = (itemType, itemContent) => (dispatch, getState) => {
   dispatch({ type: ADD_ITEM_REQUEST });
   return axios
-    .post('http://localhost:9000/api/note', {
+    .post('https://kurs-react-wp-hr-backend.herokuapp.com/api/note', {
       userID: getState().userID,
       type: itemType,
       ...itemContent,
@@ -69,7 +69,7 @@ export const addItem = (itemType, itemContent) => (dispatch, getState) => {
 export const fetchItems = (itemType) => (dispatch, getState) => {
   dispatch({ type: FETCH_REQUEST });
   return axios
-    .get('http://localhost:9000/api/notes/type', {
+    .get('https://kurs-react-wp-hr-backend.herokuapp.com/api/notes/type', {
       params: {
         userID: getState().userID,
         type: itemType,
@@ -93,7 +93,7 @@ export const fetchItems = (itemType) => (dispatch, getState) => {
 export const register = (username, password) => (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post('http://localhost:9000/api/user/register', {
+    .post('https://kurs-react-wp-hr-backend.herokuapp.com/api/user/register', {
       username,
       password,
     })
@@ -109,7 +109,7 @@ export const register = (username, password) => (dispatch) => {
 export const authenticate = (username, password) => (dispatch) => {
   dispatch({ type: AUTH_REQUEST });
   return axios
-    .post('http://localhost:9000/api/user/login', {
+    .post('https://kurs-react-wp-hr-backend.herokuapp.com/api/user/login', {
       username,
       password,
     })
@@ -125,7 +125,7 @@ export const authenticate = (username, password) => (dispatch) => {
 export const logout = (userID) => (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   return axios
-    .post('http://localhost:9000/api/user/logout', {
+    .post('https://kurs-react-wp-hr-backend.herokuapp.com/api/user/logout', {
       id: userID,
     })
     .then((payload) => {
