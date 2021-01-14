@@ -10,7 +10,7 @@ Most of the code is based on the code used in the course, however login and logo
 
 ## Live version
 
-Live version (back-end hosted on Heroku, front-end on Netlify) can be found [here](https://hungry-hypatia-288538.netlify.app/login)(User: tom123, Password: 123).
+Live version (back-end hosted on Heroku, front-end on Netlify) can be found [here](https://hungry-hypatia-288538.netlify.app/login) (User: tom123, Password: 123).
 
 ## Technologies used
 
