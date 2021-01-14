@@ -85,7 +85,7 @@ const StyledLink = styled(Button)`
 
 class LoginPage extends Component {
   state = {
-    isRegisterPage: true,
+    isRegisterPage: false,
   };
 
   handlePageSwitch = () => {
@@ -102,7 +102,7 @@ class LoginPage extends Component {
         <StyledLogo src={logoImg} alt="" />
         <Heading>Your new favorite online notes experience</Heading>
         <StyledAuthCard>
-          {isUserRegistered && (
+          {isUserRegistered && isRegisterPage && (
             <StyledStatusBar>Registration was successful, now please log in!</StyledStatusBar>
           )}
           <Heading>{isRegisterPage ? 'Create an account' : 'Sign in'}</Heading>

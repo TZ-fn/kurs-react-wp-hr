@@ -8,7 +8,7 @@ import {
 } from 'actions/index';
 
 const initialState = {
-  isUserRegistered: false,
+  isUserRegistered: true,
   // adding the user ID manually to the store, to ease up development, and testing
   // userID: '5fb52c17152fc70d78552555',
 };
