@@ -17,7 +17,7 @@ Live version (back-end hosted on Heroku, front-end on Netlify) can be found [her
 - React
 - Redux
 - styled-components
-- ajax
+- axios
 - Storybook
 - Formik
 - MongoDB
